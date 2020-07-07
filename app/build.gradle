@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-aspectjx'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        applicationId "com.aniu.aspectjeasy"
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+aspectjx {
+    //指定只对含有关键字'universal-image-loader', 'AspectJX-Demo/library'的库进行织入扫描，忽略其他库，提升编译效率
+//    includeJarFilter 'universal-image-loader', 'AspectJX-Demo/library'
+//    excludeJarFilter '.jar'
+//    ajcArgs '-Xlint:warning'
+}
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    testImplementation 'junit:junit:4.12'
+    implementation("com.squareup.okhttp3:okhttp:4.7.2")
+    // Room
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+
+}
